@@ -1,0 +1,11 @@
+
+sjc-gem-ubvpn-gw2.cisco.com
+sslvpn.sjo.amer.sykes.com
+
+http://proxy-wsa.esl.cisco.com
+
+
+Better VPN
+alln01-mda1-gem-ssl-gw1.cisco.com
+
+New VPN Sjc12-gem-ubvpn-gw2a.cisco.com/ssl

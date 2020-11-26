@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>About Flask</title>
+  </head>
+  <body>
+    {% extends "template.html" %}
+    {% block content %}
+
+    <h1> Geo IP Senction Flask </h1>
+
+    {% if value %}
+      <h1>Hello this is the value {{value}}</h1>
+    {% endif %}
+
+    <form action="/process_File" method="POST" enctype="multipart/form-data">
+
+      <div class="form-group">
+
+         <label>Choose file</label>
+         <input type="file" class="form-control" name="ipFile" id="ipFile">
+      </div>
+      <button type="submit" class="btn btn-primary">Process File</button>
+    </form>
+
+    {% endblock %}
+  </body>
+</html>
