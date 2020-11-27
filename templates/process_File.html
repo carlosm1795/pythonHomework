@@ -39,6 +39,8 @@
               <thead>
                 <tr>
                   <th scope="col">IP</th>
+                  <th scope="col">GEO Info</th>
+                  <th scope="col">RDAP Info</th>
                 </tr>
               </thead>
             <tbody>
@@ -47,19 +49,47 @@
         </div>
       </div>
       <div class = "form-group">
-            <label for = "name">IP Details</label>
-            <textarea id="ipInformation" class = "form-control" rows = "3" placeholder = "Ip Details"></textarea>
-         </div>
+        <h1> GEO IP Information</h1>
+      <table class="table" id="detailInformationIP">
+        <thead>
+          <tr>
+            <th scope="col">City</th>
+            <th scope="col">Country Code</th>
+            <th scope="col">Country Name</th>
+            <th scope="col">IP</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longitude</th>
+            <th scope="col">Metro Code</th>
+            <th scope="col">Region Code</th>
+            <th scope="col">Region Name</th>
+            <th scope="col">Time Zone</th>
+            <th scope="col">Zip Code</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+        <hr/>
+         <h1> RDAP Information</h1>
+        <table class="table" id="detailInformationIPRDAP">
+            <thead>
+              <tr>
+                <th scope="col">IP Version</th>
+                <th scope="col">Address Range:</th>
+                <th scope="col">Network Name:</th>
+                <th scope="col">Network Type:</th>
+                <th scope="col">Country:</th>
+              </tr>
+            </thead>
+        </table>
+      </div>
     </div>
 
-      <select class="js-example-basic-single" id="selectedIP" name="state">
-        {% for dict_item in ip['IPlist'] %}
-          <option value="{{dict_item}}">{{dict_item}}</option>
-        {% endfor %}
-      </select>
-      <button onclick="consultIP()" class="btn btn-primary">Consult IP</button>
       {% endif %}
     {% endblock %}
+
+
+
   </body>
 
 </html>

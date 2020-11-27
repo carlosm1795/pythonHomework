@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect,request,jsonify
+from flask import Flask, render_template, send_from_directory,request,jsonify
 from werkzeug.utils import secure_filename
 import os
 import re
@@ -39,9 +39,27 @@ def filterIPS(listIP,regex):
             ips.append(ip)
     return ips
 
+def getRDAPCall(ip):
+    url = "https://rdap.apnic.net/ip/"+ip
+    payload = {}
+    headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    }
+    response = requests.request("GET", url, headers=headers, data=payload)
+    rdap = response.json()
+    return rdap
+
 @app.route("/")
 def home():
     return render_template("home.html")
+
+@app.route("/getRDAP/", methods=["POST"])
+def getRDAP():
+    response=request.get_json()
+    ipInformation = getRDAPCall(response["ip"])
+
+    return jsonify(ipInformation)
 
 @app.route("/filterIPS/", methods=["POST"])
 def filterIPS():
@@ -49,8 +67,6 @@ def filterIPS():
     ips = []
     response = request.get_json()
     regex = response["regex"]
-    print(regex)
-    print(listIP)
     for ip in listIP:
         aux = re.findall('^'+regex, ip)
         if len(aux) > 0:
@@ -60,9 +76,8 @@ def filterIPS():
 @app.route("/api/",methods=["POST"])
 def api():
     response=request.get_json()
-    print(response["message"])
     ipInformation = consult(response["message"])
-    print(ipInformation)
+
     return jsonify(ipInformation)
 
 @app.route("/geoIP")
