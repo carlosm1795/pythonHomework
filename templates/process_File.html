@@ -14,27 +14,29 @@
   </head>
   <body>
     <div class="form-group">
+
+      <a href="{{url_for('donwload_file')}}">Donwload</a>
       <label for="inputText">Email address</label>
       <input type="text" class="form-control" id="ipFilterInput" aria-describedby="emailHelp" placeholder="Enter the ip to filter" onclick="filterIPS()">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       <br>
       <button onclick="filterIPS()" class="btn btn-primary">Filter IPS</button>
+      <div class="hidden spinner-border" id="spinner">Loading</div>
     </div>
     <div class="">
       <div class="row">
-            <div class="col-sm-4" style="background-color:lavender;">
+            <div class="col-sm-4 my-custom-scrollbar">
               {% extends "template.html" %}
               {% block content %}
                 {% if ip %}
                 <h1> View Information: Total IPS: {{ip['TotalIP']}} </h1>
-                <div class="vertical-scrollable">
+                <div class="">
                   {% for dict_item in ip['IPlist'] %}
                     {{dict_item}}
                     <br>
                   {% endfor %}
                 </div>
           </div>
-        <div class="col-sm-8 vertical-scrollable" style="background-color:lavenderblush;">
+        <div class="col-sm-8 my-custom-scrollbar" >
           <table class="table" id="listIpFiltered">
               <thead>
                 <tr>
@@ -75,12 +77,14 @@
             <thead>
               <tr>
                 <th scope="col">IP Version</th>
-                <th scope="col">Address Range:</th>
-                <th scope="col">Network Name:</th>
-                <th scope="col">Network Type:</th>
-                <th scope="col">Country:</th>
+                <th scope="col">Start Address:</th>
+                <th scope="col">End Address:</th>
+                <th scope="col">Name:</th>
+                <th scope="col">Type:</th>
               </tr>
             </thead>
+            <tbody>
+            </tbody>
         </table>
       </div>
     </div>

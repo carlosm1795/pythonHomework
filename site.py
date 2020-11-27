@@ -1,14 +1,22 @@
-from flask import Flask, render_template, send_from_directory,request,jsonify
+from flask import Flask, render_template, send_from_directory,request,jsonify,send_file
 from werkzeug.utils import secure_filename
-import os
-import re
-import requests
-import json
+import os,re,requests,json,logging,datetime
+
 app = Flask(__name__)
 
 global listIP
 listIP = []
 
+"""
+    This function is going to calculate the actual Date and return into the following output
+    DD-MONTH-YEAR hh:mm:ss
+    No Inputs required
+    Return outputDate in string format
+"""
+def getActualDate():
+    date = datetime.datetime.now()
+    outputDate = "{}-{}-{} {}:{}:{}".format(date.day,date.month,date.year,date.hour,date.minute,date.second)
+    return outputDate
 def getName():
     return 2+2
 
@@ -28,6 +36,7 @@ def consult(ip):
       'Accept': 'application/json',
     }
     response = requests.request("GET", url, headers=headers, data=json.dumps(payload))
+    logging.getLogger(__name__).info("Evaluating the IP:%s at [%s]"%(ip,getActualDate()))
     answerIP = response.json()
     return answerIP
 
@@ -85,6 +94,11 @@ def geoIP():
     value = getName()
     return render_template("geoIP.html",value=value)
 
+@app.route("/download")
+def donwload_file():
+    p = "Aguinaldos.csv"
+    return send_file(p,as_attachment=True)
+
 @app.route("/process_File",methods=["GET","POST"])
 def process_File():
     if request.method == 'POST':
@@ -111,4 +125,5 @@ def process_File():
     return result
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.DEBUG,filename='calc.log')
     app.run(debug=True)
