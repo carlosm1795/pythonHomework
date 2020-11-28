@@ -2,7 +2,7 @@ function consultIP(){
     var ip = document.getElementById("selectedIP").value
     if (ip != ""){
         $.ajax({
-		url:"http://127.0.0.1:5000/api/",
+		url:"/api/",
 		crossDomain: true,
 		type:"POST",
 		contentType:"application/json",
@@ -28,7 +28,7 @@ function filterIPS(){
     var ipRegex = document.getElementById("ipFilterInput").value
         if (ipRegex != ""){
             $.ajax({
-            url:"http://127.0.0.1:5000/filterIPS/",
+            url:"/filterIPS/",
             crossDomain: true,
             type:"POST",
             contentType:"application/json",
@@ -187,7 +187,7 @@ function insertRDAPINFOError(){
 function getMoreInformation(ip){
     if (ip != ""){
         $.ajax({
-		url:"http://127.0.0.1:5000/api/",
+		url:"/api/",
 		crossDomain: true,
 		type:"POST",
 		contentType:"application/json",
@@ -212,7 +212,7 @@ function getMoreInformation(ip){
 function getRDAP(ip){
     if (ip != ""){
         $.ajax({
-		url:"http://127.0.0.1:5000/getRDAP/",
+		url:"/getRDAP/",
 		crossDomain: true,
 		type:"POST",
 		contentType:"application/json",
@@ -240,9 +240,9 @@ function getRDAP(ip){
 }
 
 function exportCSV(ip){
-     window.location='http://127.0.0.1:5000/download/'+ip;
+     window.location='/download/'+ip;
 }
 
 function exportJSON(ip){
-     window.location='http://127.0.0.1:5000/downloadJSON/'+ip;
+     window.location='/downloadJSON/'+ip;
 }
