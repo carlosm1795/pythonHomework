@@ -25,4 +25,4 @@ Description:
       
       
   
- For more information about how to use the script you can see the UserGuide.doc file on the repository.
+ For more information about how to use the script you can see the UserGuide.pdf file on the repository.

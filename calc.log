@@ -32,3 +32,16 @@ DEBUG:urllib3.connectionpool:https://rdap.apnic.net:443 "GET /ip/208.128.240.230
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rdap.arin.net:443
 DEBUG:urllib3.connectionpool:https://rdap.arin.net:443 "GET /registry/ip/208.128.240.230 HTTP/1.1" 200 None
 INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:02:32] "[37mPOST /getRDAP/ HTTP/1.1[0m" 200 -
+INFO:__main__:Processing File: list_of_ips.txt
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:18:41] "[37mPOST /process_File HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:18:41] "[37mGET /static/css/template.css HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:18:42] "[37mGET /static/js/site.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:18:44] "[37mGET / HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:19:10] "[37mGET /geoIP HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:19:47] "[37mGET / HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:19:47] "[37mGET /static/js/site.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:19:47] "[37mGET /static/css/template.css HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:20:34] "[37mGET / HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:20:34] "[37mGET /static/js/site.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:20:34] "[37mGET /static/css/template.css HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 16:20:48] "[37mGET /geoIP HTTP/1.1[0m" 200 -

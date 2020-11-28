@@ -9,9 +9,9 @@
     {% block content %}
 
     <h1>Welcome to GEO ip and RDAP site </h1>
-    <a href="https://github.com/carlosm1795/pythonHomework/tree/master">Git Hub Code</a>
-    <a href="https://github.com/carlosm1795/pythonHomework/tree/master">User Guide</a>
-    <a href="https://github.com/carlosm1795/pythonHomework/tree/master">Run Application</a>
+    <button target="_blank" class="btn btn-primary"><a href="https://github.com/carlosm1795/pythonHomework/tree/master">Git Hub Code</a></button>
+    <button target="_blank" class="btn btn-primary"><a href="https://github.com/carlosm1795/pythonHomework/blob/master/UserGuide.pdf">User Guide</a></button>
+    <button class="btn btn-primary"><a href="{{url_for('geoIP')}}">Run Application</a></button>
 
     {% endblock %}
   </body>
