@@ -625,3 +625,98 @@ INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 103-780-904
 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 103-780-904
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:12:54] "[37mGET /geoIP HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:12:54] "[37mGET /static/js/site.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:12:54] "[37mGET /static/css/template.css HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:12:59] "[37mPOST /process_File HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:13:03] "[37mPOST /filterIPS/ HTTP/1.1[0m" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): freegeoip.app:443
+DEBUG:urllib3.connectionpool:https://freegeoip.app:443 "GET /json/208.128.240.230 HTTP/1.1" 200 None
+INFO:__main__:Evaluating the IP:208.128.240.230 at [28-11-2020 11:13:5]
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:13:05] "[37mPOST /api/ HTTP/1.1[0m" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rdap.apnic.net:443
+DEBUG:urllib3.connectionpool:https://rdap.apnic.net:443 "GET /ip/208.128.240.230 HTTP/1.1" 301 0
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rdap.arin.net:443
+DEBUG:urllib3.connectionpool:https://rdap.arin.net:443 "GET /registry/ip/208.128.240.230 HTTP/1.1" 200 None
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:13:14] "[37mPOST /getRDAP/ HTTP/1.1[0m" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): freegeoip.app:443
+DEBUG:urllib3.connectionpool:https://freegeoip.app:443 "GET /json/208.128.240.230 HTTP/1.1" 200 None
+INFO:__main__:Evaluating the IP:208.128.240.230 at [28-11-2020 11:13:17]
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rdap.apnic.net:443
+DEBUG:urllib3.connectionpool:https://rdap.apnic.net:443 "GET /ip/208.128.240.230 HTTP/1.1" 301 0
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rdap.arin.net:443
+DEBUG:urllib3.connectionpool:https://rdap.arin.net:443 "GET /registry/ip/208.128.240.230 HTTP/1.1" 200 None
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:13:24] "[37mGET /download/208.128.240.230 HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:13:52] "[37mPOST /filterIPS/ HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:13:54] "[37mPOST /filterIPS/ HTTP/1.1[0m" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): freegeoip.app:443
+DEBUG:urllib3.connectionpool:https://freegeoip.app:443 "GET /json/244.36.171.60 HTTP/1.1" 200 None
+INFO:__main__:Evaluating the IP:244.36.171.60 at [28-11-2020 11:13:56]
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:13:56] "[37mPOST /api/ HTTP/1.1[0m" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rdap.apnic.net:443
+DEBUG:urllib3.connectionpool:https://rdap.apnic.net:443 "GET /ip/244.36.171.60 HTTP/1.1" 404 328
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:14:00] "[37mPOST /getRDAP/ HTTP/1.1[0m" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): freegeoip.app:443
+DEBUG:urllib3.connectionpool:https://freegeoip.app:443 "GET /json/244.36.171.60 HTTP/1.1" 200 None
+INFO:__main__:Evaluating the IP:244.36.171.60 at [28-11-2020 11:14:2]
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rdap.apnic.net:443
+DEBUG:urllib3.connectionpool:https://rdap.apnic.net:443 "GET /ip/244.36.171.60 HTTP/1.1" 404 328
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:14:03] "[37mGET /download/244.36.171.60 HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\carbarbo\\Documents\\DevOps\\Study\\Job\\site.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 103-780-904
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Detected change in 'C:\\Users\\carbarbo\\Documents\\DevOps\\Study\\Job\\site.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 103-780-904
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:32:11] "[37mGET /geoIP HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:32:18] "[37mPOST /process_File HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:32:22] "[37mPOST /filterIPS/ HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:34:12] "[37mGET /geoIP HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:34:12] "[37mGET /static/js/site.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:34:12] "[37mGET /static/css/template.css HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:34:17] "[37mPOST /process_File HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:34:21] "[37mPOST /filterIPS/ HTTP/1.1[0m" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): freegeoip.app:443
+DEBUG:urllib3.connectionpool:https://freegeoip.app:443 "GET /json/208.128.240.230 HTTP/1.1" 200 None
+INFO:__main__:Evaluating the IP:208.128.240.230 at [28-11-2020 11:34:27]
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rdap.apnic.net:443
+DEBUG:urllib3.connectionpool:https://rdap.apnic.net:443 "GET /ip/208.128.240.230 HTTP/1.1" 301 0
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rdap.arin.net:443
+DEBUG:urllib3.connectionpool:https://rdap.arin.net:443 "GET /registry/ip/208.128.240.230 HTTP/1.1" 200 None
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:34:28] "[37mGET /downloadJSON/208.128.240.230 HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\carbarbo\\Documents\\DevOps\\Study\\Job\\site.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 103-780-904
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:45:38] "[37mGET /geoIP HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:45:38] "[37mGET /static/css/template.css HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:45:38] "[37mGET /static/js/site.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:45:43] "[37mPOST /process_File HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:45:47] "[37mPOST /filterIPS/ HTTP/1.1[0m" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): freegeoip.app:443
+DEBUG:urllib3.connectionpool:https://freegeoip.app:443 "GET /json/208.128.240.230 HTTP/1.1" 200 None
+INFO:__main__:Evaluating the IP:208.128.240.230 at [28-11-2020 11:45:49]
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rdap.apnic.net:443
+DEBUG:urllib3.connectionpool:https://rdap.apnic.net:443 "GET /ip/208.128.240.230 HTTP/1.1" 301 0
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rdap.arin.net:443
+DEBUG:urllib3.connectionpool:https://rdap.arin.net:443 "GET /registry/ip/208.128.240.230 HTTP/1.1" 200 None
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:45:51] "[37mGET /downloadJSON/208.128.240.230 HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:48:16] "[37mPOST /filterIPS/ HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:48:18] "[37mPOST /filterIPS/ HTTP/1.1[0m" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): freegeoip.app:443
+DEBUG:urllib3.connectionpool:https://freegeoip.app:443 "GET /json/244.36.171.60 HTTP/1.1" 200 None
+INFO:__main__:Evaluating the IP:244.36.171.60 at [28-11-2020 11:48:33]
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rdap.apnic.net:443
+DEBUG:urllib3.connectionpool:https://rdap.apnic.net:443 "GET /ip/244.36.171.60 HTTP/1.1" 404 328
+INFO:werkzeug:127.0.0.1 - - [28/Nov/2020 11:48:33] "[37mGET /downloadJSON/244.36.171.60 HTTP/1.1[0m" 200 -

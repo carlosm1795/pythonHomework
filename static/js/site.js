@@ -55,6 +55,7 @@ function InsertIntoTable(data){
                 tr.appendChild(document.createElement('td'));
                 tr.appendChild(document.createElement('td'));
                 tr.appendChild(document.createElement('td'));
+                tr.appendChild(document.createElement('td'));
 
                 var btn = document.createElement("BUTTON");
                 btn.value = data[i];
@@ -76,10 +77,17 @@ function InsertIntoTable(data){
                 exportAsCsv.innerHTML = "CSV";
                 exportAsCsv.onclick = function() { exportCSV(this.id); }
 
+                var exportAsJson = document.createElement("BUTTON");
+                exportAsJson.value = data[i];
+                exportAsJson.id = data[i];
+                exportAsJson.innerHTML = "JSON";
+                exportAsJson.onclick = function() { exportJSON(this.id); }
+
                 tr.cells[0].appendChild(document.createTextNode(data[i]));
                 tr.cells[1].appendChild(btn);
                 tr.cells[2].appendChild(btnRDAP);
                 tr.cells[3].appendChild(exportAsCsv);
+                tr.cells[4].appendChild(exportAsJson);
 
                 tbodyRef.appendChild(tr);
             }
@@ -233,5 +241,8 @@ function getRDAP(ip){
 
 function exportCSV(ip){
      window.location='http://127.0.0.1:5000/download/'+ip;
+}
 
+function exportJSON(ip){
+     window.location='http://127.0.0.1:5000/downloadJSON/'+ip;
 }

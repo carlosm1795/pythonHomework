@@ -59,6 +59,23 @@ def getRDAPCall(ip):
     rdap = response.json()
     return rdap
 
+'''
+    This function is going to create a JSON file with the GEOIP information and the RDAP information
+    receive a string with the IP in question
+    return the JSON File Name
+'''
+def createJsonFile(ip):
+    try:
+        ipInformation = consult(ip)
+        ipRDAPInformation = getRDAPCall(ip)
+        ipInformation["rdapInformation"] = ipRDAPInformation
+        fileName = "ExportData.json"
+        with open(fileName, 'w') as outfile:
+            json.dump(ipInformation, outfile)
+        return fileName
+    except (RuntimeError, TypeError, NameError):
+        logging.getLogger(__name__).info("Name Error: %s, RunTimeError: %s, TypeError: %s" % (NameError, RuntimeError,TypeError))
+
 def createCsv(ip):
     ipInformation = consult(ip)
     ipRDAPInformation = getRDAPCall(ip)
@@ -107,6 +124,11 @@ def api():
 def geoIP():
     value = getName()
     return render_template("geoIP.html",value=value)
+
+@app.route("/downloadJSON/<ip>")
+def donwload_JSON(ip):
+    fileName = createJsonFile(ip)
+    return send_file(fileName, as_attachment=True)
 
 @app.route("/download/<ip>")
 def donwload_file(ip):
