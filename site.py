@@ -7,6 +7,16 @@ app = Flask(__name__)
 global listIP
 listIP = []
 
+
+'''
+    This function is going to add an error Log when the try except faile
+    We receive RuntimeErro: String, TypeError: String, NameError: String
+    return nothing
+'''
+def addLoginLogExcept(RuntimeError, TypeError, NameError):
+    logging.getLogger(__name__).info(
+        "Name Error: %s, RunTimeError: %s, TypeError: %s" % (NameError, RuntimeError, TypeError))
+
 """
     This function is going to calculate the actual Date and return into the following output
     DD-MONTH-YEAR hh:mm:ss
@@ -17,9 +27,12 @@ def getActualDate():
     date = datetime.datetime.now()
     outputDate = "{}-{}-{} {}:{}:{}".format(date.day,date.month,date.year,date.hour,date.minute,date.second)
     return outputDate
-def getName():
-    return 2+2
 
+'''
+    This function is going to extract all the IPS of a file.
+    We receive a fileName: string:
+    Return FinalList: list
+'''
 def extractIP(fileName):
     listip = [re.findall(r'(?:[0-9]{1,3}\.){3}[0-9]{1,3}', line) for line in open(fileName)]
     finalList = []
@@ -28,18 +41,29 @@ def extractIP(fileName):
             finalList = finalList + ip
     return finalList
 
+'''
+    This function is going to consult the GEO IP information base on the IP
+    We Receive an IP: string
+    return a dictionary with the following keys: ip,country_code,country_name,region_code,region_name,city,zip_code,time_zone,latitude,longitude,metro_code
+'''
 def consult(ip):
-    url = "https://freegeoip.app/json/"+ip
-    payload={}
-    headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    }
-    response = requests.request("GET", url, headers=headers, data=json.dumps(payload))
-    logging.getLogger(__name__).info("Evaluating the IP:%s at [%s]"%(ip,getActualDate()))
-    answerIP = response.json()
-    return answerIP
+    try:
+        url = "https://freegeoip.app/json/" + ip
+        payload = {}
+        headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        }
+        response = requests.request("GET", url, headers=headers, data=json.dumps(payload))
+        logging.getLogger(__name__).info("Evaluating the IP:%s at [%s]" % (ip, getActualDate()))
+        answerIP = response.json()
 
+        return answerIP
+
+    except(RuntimeError, TypeError, NameError):
+        addLoginLogExcept(RuntimeError, TypeError, NameError)
+
+'''
 def filterIPS(listIP,regex):
     ips = []
     for ip in listIP:
@@ -47,17 +71,29 @@ def filterIPS(listIP,regex):
         if len(aux) > 0:
             ips.append(ip)
     return ips
+'''
 
+'''
+    This function is going to Calculate all the RDAP information related with an IP
+    Receive and IP:string
+    return rdap: Dictionary, 
+    with the following keys: rdapConformance,notices,handle,startAddress,endAddress,ipVersion,name,type,parentHandle,events,links,entities,port43,status,objectClassName,cidr0_cidrs,arin_originas0_originautnums
+'''
 def getRDAPCall(ip):
-    url = "https://rdap.apnic.net/ip/"+ip
-    payload = {}
-    headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-    }
-    response = requests.request("GET", url, headers=headers, data=payload)
-    rdap = response.json()
-    return rdap
+    try:
+        url = "https://rdap.apnic.net/ip/" + ip
+        payload = {}
+        headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        }
+        response = requests.request("GET", url, headers=headers, data=payload)
+        rdap = response.json()
+        return rdap
+    except(RuntimeError, TypeError, NameError):
+        addLoginLogExcept(RuntimeError, TypeError, NameError)
+
+
 
 '''
     This function is going to create a JSON file with the GEOIP information and the RDAP information
@@ -74,8 +110,13 @@ def createJsonFile(ip):
             json.dump(ipInformation, outfile)
         return fileName
     except (RuntimeError, TypeError, NameError):
-        logging.getLogger(__name__).info("Name Error: %s, RunTimeError: %s, TypeError: %s" % (NameError, RuntimeError,TypeError))
+        addLoginLogExcept(RuntimeError, TypeError, NameError)
 
+'''
+    This function is going to create a csv File with the GEO IP and RDAP Information
+    Receive an iP address: string
+    Return fileName: String
+'''
 def createCsv(ip):
     ipInformation = consult(ip)
     ipRDAPInformation = getRDAPCall(ip)
@@ -90,6 +131,7 @@ def createCsv(ip):
         writer.writerow(list(ipRDAPInformation.keys()))
         writer.writerow(list(ipRDAPInformation.values()))
     return fileName
+
 @app.route("/")
 def home():
     return render_template("home.html")
@@ -106,7 +148,7 @@ def filterIPS():
     global listIP
     ips = []
     response = request.get_json()
-    regex = response["regex"]
+    regex = response["regex"].strip()
     for ip in listIP:
         aux = re.findall('^'+regex, ip)
         if len(aux) > 0:
@@ -122,8 +164,7 @@ def api():
 
 @app.route("/geoIP")
 def geoIP():
-    value = getName()
-    return render_template("geoIP.html",value=value)
+    return render_template("geoIP.html" )
 
 @app.route("/downloadJSON/<ip>")
 def donwload_JSON(ip):
@@ -133,30 +174,25 @@ def donwload_JSON(ip):
 @app.route("/download/<ip>")
 def donwload_file(ip):
     fileName = createCsv(ip)
-    p = "Aguinaldos.csv"
     return send_file(fileName,as_attachment=True)
+
+@app.route("/downloadLogsFiles/")
+def downloadLogFiles():
+    logFileName = 'calc.log'
+    return send_file(logFileName, as_attachment=True)
 
 @app.route("/process_File",methods=["GET","POST"])
 def process_File():
     if request.method == 'POST':
         global listIP
-        # for secure filenames. Read the documentation.
         file = request.files['ipFile']
         filename = secure_filename(file.filename)
-
-        # os.path.join is used so that paths work in every operating system
         path = os.path.join("files", filename)
-        #file.save(path)
-
-        # You should use os.path.join here too.
-        #with open(path) as f:
-        #    file_content = f.read()
         lista = extractIP(path)
         listIP = lista
         dictoIps = {"IPlist":lista,"TotalIP":len(lista)}
+
         return render_template("process_File.html",ip=dictoIps)
-
-
     else:
         result = request.args.get['myfile']
     return result
