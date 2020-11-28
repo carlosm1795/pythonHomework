@@ -16,11 +16,12 @@
     <div class="form-group">
 
 
-      <label for="inputText">Email address</label>
+      <label for="inputText">Ip To filter:</label>
       <input type="text" class="form-control" id="ipFilterInput" aria-describedby="emailHelp" placeholder="Enter the ip to filter" onclick="filterIPS()">
       <br>
       <button onclick="filterIPS()" class="btn btn-primary">Filter IPS</button>
       <button class="btn btn-primary"><a href = {{url_for('downloadLogFiles')}}>Download Logs Files</a></button>
+      <button class="btn btn-primary"><a href = {{url_for('resetLogs')}}>Reset Logs File</a></button>
       <div class="hidden spinner-border" id="spinner">Loading</div>
     </div>
     <div class="">
