@@ -138,6 +138,7 @@ def home():
 @app.route("/resetLogs/")
 def resetLogs():
     with open("calc.log", 'w', newline='') as file:
+        file.write("----------------------------")
         logging.getLogger(__name__).info("Reset Log Files")
     return geoIP()
 
