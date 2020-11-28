@@ -1,0 +1,6 @@
+GEO IP Information
+ip,country_code,country_name,region_code,region_name,city,zip_code,time_zone,latitude,longitude,metro_code
+244.36.171.60,,,,,,,,0,0,0
+RDAP INFORMATION
+description,errorCode,title,notices,rdapConformance
+[],404,Not Found,"[{'description': ['This is the APNIC RDAP query service. The objects are in RDAP format.'], 'links': [{'href': 'http://www.apnic.net/db/dbcopyright.html', 'rel': 'terms-of-service', 'type': 'text/html'}], 'title': 'Terms and Conditions'}]",['rdap_level_0']

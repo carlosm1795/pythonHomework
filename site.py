@@ -1,6 +1,6 @@
 from flask import Flask, render_template, send_from_directory,request,jsonify,send_file
 from werkzeug.utils import secure_filename
-import os,re,requests,json,logging,datetime
+import os,re,requests,json,logging,datetime,csv
 
 app = Flask(__name__)
 
@@ -59,6 +59,20 @@ def getRDAPCall(ip):
     rdap = response.json()
     return rdap
 
+def createCsv(ip):
+    ipInformation = consult(ip)
+    ipRDAPInformation = getRDAPCall(ip)
+    fileName = "ExportData.csv"
+    with open(fileName,'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["GEO IP Information"])
+        writer.writerow(list(ipInformation.keys()))
+        writer.writerow(list(ipInformation.values()))
+
+        writer.writerow(["RDAP INFORMATION"])
+        writer.writerow(list(ipRDAPInformation.keys()))
+        writer.writerow(list(ipRDAPInformation.values()))
+    return fileName
 @app.route("/")
 def home():
     return render_template("home.html")
@@ -94,10 +108,11 @@ def geoIP():
     value = getName()
     return render_template("geoIP.html",value=value)
 
-@app.route("/download")
-def donwload_file():
+@app.route("/download/<ip>")
+def donwload_file(ip):
+    fileName = createCsv(ip)
     p = "Aguinaldos.csv"
-    return send_file(p,as_attachment=True)
+    return send_file(fileName,as_attachment=True)
 
 @app.route("/process_File",methods=["GET","POST"])
 def process_File():

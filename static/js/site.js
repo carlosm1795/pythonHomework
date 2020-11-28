@@ -54,6 +54,7 @@ function InsertIntoTable(data){
                 tr.appendChild(document.createElement('td'));
                 tr.appendChild(document.createElement('td'));
                 tr.appendChild(document.createElement('td'));
+                tr.appendChild(document.createElement('td'));
 
                 var btn = document.createElement("BUTTON");
                 btn.value = data[i];
@@ -69,9 +70,16 @@ function InsertIntoTable(data){
                 var x = data[i].toString();
                 btnRDAP.onclick = function() { getRDAP(this.id); }
 
+                var exportAsCsv = document.createElement("BUTTON");
+                exportAsCsv.value = data[i];
+                exportAsCsv.id = data[i];
+                exportAsCsv.innerHTML = "CSV";
+                exportAsCsv.onclick = function() { exportCSV(this.id); }
+
                 tr.cells[0].appendChild(document.createTextNode(data[i]));
                 tr.cells[1].appendChild(btn);
                 tr.cells[2].appendChild(btnRDAP);
+                tr.cells[3].appendChild(exportAsCsv);
 
                 tbodyRef.appendChild(tr);
             }
@@ -221,4 +229,9 @@ function getRDAP(ip){
         },
 	})
     }
+}
+
+function exportCSV(ip){
+     window.location='http://127.0.0.1:5000/download/'+ip;
+
 }
