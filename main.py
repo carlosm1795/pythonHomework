@@ -16,6 +16,7 @@ listIP = []
 def addLoginLogExcept(RuntimeError, TypeError, NameError):
     logging.getLogger(__name__).info(
         "Name Error: %s, RunTimeError: %s, TypeError: %s" % (NameError, RuntimeError, TypeError))
+    writeIntoLog("Name Error: %s, RunTimeError: %s, TypeError: %s, at: %s" % (NameError, RuntimeError, TypeError,getActualDate()))
 
 """
     This function is going to calculate the actual Date and return into the following output
@@ -56,21 +57,13 @@ def consult(ip):
         }
         response = requests.request("GET", url, headers=headers, data=json.dumps(payload))
         logging.getLogger(__name__).info("Evaluating the IP:%s at [%s]" % (ip, getActualDate()))
+        writeIntoLog("Evaluating the IP:%s at [%s]" % (ip, getActualDate()))
         answerIP = response.json()
         return answerIP
 
     except(RuntimeError, TypeError, NameError):
         addLoginLogExcept(RuntimeError, TypeError, NameError)
 
-'''
-def filterIPS(listIP,regex):
-    ips = []
-    for ip in listIP:
-        aux = re.findall(regex,ip)
-        if len(aux) > 0:
-            ips.append(ip)
-    return ips
-'''
 
 '''
     This function is going to Calculate all the RDAP information related with an IP
@@ -131,14 +124,19 @@ def createCsv(ip):
         writer.writerow(list(ipRDAPInformation.values()))
     return fileName
 
+def writeIntoLog(line):
+    with open("logs.log", 'a', newline='') as file:
+        file.write(line)
+        file.write('\n')
+
 @app.route("/")
 def home():
     return render_template("home.html")
 
 @app.route("/resetLogs/")
 def resetLogs():
-    with open("calc.log", 'w', newline='') as file:
-        file.write("----------------------------")
+    with open("logs.log", 'w', newline='') as file:
+        file.write("")
         logging.getLogger(__name__).info("Reset Log Files")
     return geoIP()
 
@@ -156,6 +154,7 @@ def filterIPS():
     ips = []
     response = request.get_json()
     regex = response["regex"].strip()
+    writeIntoLog("Filtering Using the Ip: %s at [%s]" % (response["regex"].strip(), getActualDate()))
     for ip in listIP:
         aux = re.findall('^'+regex, ip)
         if len(aux) > 0:
@@ -167,7 +166,7 @@ def api():
     response=request.get_json()
     ipInformation = consult(response["message"])
     logging.getLogger(__name__).info("Processing Ip: %s" % (response["message"]))
-
+    writeIntoLog("Processing Ip: %s at [%s]" % (response["message"],getActualDate()))
     return jsonify(ipInformation)
 
 @app.route("/geoIP")
@@ -186,7 +185,7 @@ def donwload_file(ip):
 
 @app.route("/downloadLogsFiles/")
 def downloadLogFiles():
-    logFileName = 'calc.log'
+    logFileName = 'logs.log'
     return send_file(logFileName, as_attachment=True)
 
 @app.route("/process_File",methods=["GET","POST"])
@@ -201,12 +200,12 @@ def process_File():
         dictoIps = {"IPlist":lista,"TotalIP":len(lista)}
 
         logging.getLogger(__name__).info("Processing File: %s" % (filename))
-
+        writeIntoLog("Processing File: %s, at [%s]" % (filename,getActualDate()))
         return render_template("process_File.html",ip=dictoIps)
     else:
         result = request.args.get['myfile']
     return result
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG,filename='calc.log')
+    logging.basicConfig(level=logging.DEBUG,filename='calc.log',filemode='w')
     app.run(debug=True)
